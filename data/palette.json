@@ -1,0 +1,34 @@
+{
+  "source": "Sample sentences written in 10-K style",
+  "engine": "finbert",
+  "n": 40,
+  "palette": [
+    {
+      "name": "Guidance Green",
+      "hex": "#00B37E",
+      "usage": "Headlines, growth figures, anything above last quarter.",
+      "label": "positive",
+      "share": 0.375,
+      "count": 15,
+      "example": "Net revenue increased 18% compared to the prior year, driven by strong demand for our core products."
+    },
+    {
+      "name": "Cautious Optimism Blue",
+      "hex": "#2337E6",
+      "usage": "Body copy, risk factors, forward-looking statements.",
+      "label": "neutral",
+      "share": 0.25,
+      "count": 10,
+      "example": "A significant portion of our revenue is derived from a limited number of customers."
+    },
+    {
+      "name": "Write-Down Red",
+      "hex": "#E5484D",
+      "usage": "Reserved for competitors. Use sparingly, at 8pt or smaller.",
+      "label": "negative",
+      "share": 0.375,
+      "count": 15,
+      "example": "Operating income declined primarily due to higher input costs."
+    }
+  ]
+}

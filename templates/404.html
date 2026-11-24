@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Page right-sized{% endblock %}
+{% block body_class %}page-404{% endblock %}
+{% block content %}
+<section class="notfound">
+<pre class="notfound-art" aria-hidden="true">
+        .--------------------------.
+        |  ▲ material_weakness     |
+        |                          |
+        |   404                    |
+        |   page right-sized       |
+        |                          |
+        |   $ growth --since=best  |
+        |   > _                    |
+        '--------------------------'
+     ...........|          |..........
+    :           |__________|          :
+    :  ________________________________ :
+    : |  [▲]  |____________|| ::::  |  :
+    '-|_______|____________||_______|--'
+</pre>
+  <h1 class="notfound-title">This page has been <span class="accent pixel">right-sized.</span></h1>
+  <p class="muted">We're refocusing on our core pages. Thank you for your contributions.</p>
+  <a class="btn btn-ghost" href="{{ url_for('index') }}">← Return to growth</a>
+</section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Voice &amp; Tone{% endblock %}
+{% block content %}
+<p class="eyebrow">Foundations</p>
+<h1>Voice &amp; Tone</h1>
+<p class="lede">Material Weakness speaks with confidence, warmth and no specific commitments.
+  Paste any sentence to see whether it's on brand.</p>
+<pre class="ascii-field ascii-strip" data-rows="5" data-trend="flat" data-seed="9" aria-hidden="true"></pre>
+
+<div class="voice-tool">
+  <textarea id="voice-input" rows="4">We anticipate continued momentum as we leverage synergies across our ecosystem, subject to macroeconomic headwinds.</textarea>
+  <div class="examples">
+    Try:
+    <button class="chip-btn" data-text="Revenue fell 12% and we are laying off 400 people.">An honest one</button>
+    <button class="chip-btn" data-text="We believe our disciplined capital allocation may potentially drive long-term value creation.">A perfect one</button>
+    <button class="chip-btn" data-text="Our new product is selling well.">A normal one</button>
+  </div>
+  <button id="voice-check" class="btn btn-primary">Check voice</button>
+</div>
+
+<div id="voice-result" class="voice-result hidden">
+  <div class="score-ring"><span id="voice-score">0</span><small>/100</small></div>
+  <div>
+    <h2 id="voice-verdict"></h2>
+    <p id="voice-note"></p>
+    <p class="mono small" id="voice-detail"></p>
+    <p id="voice-highlight" class="highlighted"></p>
+  </div>
+</div>
+
+<h2>Guidelines</h2>
+<div class="do-dont">
+  <div class="do"><h4>Do</h4><p>"We expect to see improvement in the back half."</p></div>
+  <div class="dont"><h4>Don't</h4><p>"Sales are down."</p></div>
+  <div class="do"><h4>Do</h4><p>"We're right-sizing to accelerate our growth story."</p></div>
+  <div class="dont"><h4>Don't</h4><p>"We're laying people off."</p></div>
+</div>
+
+<p class="truth-note">What actually happened: the score combines FinBERT's sentiment label with
+  counts of hedge words and corporate jargon. The sentiment engine in use is shown with each result.</p>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/voice.js') }}"></script>
+{% endblock %}

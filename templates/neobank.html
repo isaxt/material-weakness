@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Neobank Mode{% endblock %}
+{% block body_class %}page-neobank{% endblock %}
+{% block content %}
+<p class="eyebrow">Components · Neobank Mode</p>
+<h1>Market news, made emotionally appropriate.</h1>
+<p class="lede">Paste a financial headline. FinBERT reads it, and the app responds the way
+  fintech apps do: celebration for good news, affirmations for bad.</p>
+<pre class="ascii-field ascii-strip" data-rows="5" data-trend="up" data-seed="13" aria-hidden="true"></pre>
+
+<div class="neobank-layout">
+  <div class="neobank-input">
+    <textarea id="nb-input" rows="3">Shares surge after record quarterly profit beats expectations</textarea>
+    <div class="examples">
+      Try:
+      <button class="chip-btn" data-text="Shares plunge after company misses earnings and announces layoffs">Bad day</button>
+      <button class="chip-btn" data-text="Central bank holds interest rates steady">Meh day</button>
+      <button class="chip-btn" data-text="Stock hits all-time high on strong AI demand">Great day</button>
+    </div>
+    <button id="nb-go" class="btn btn-primary">Send to app</button>
+    <p id="nb-readout" class="mono small"></p>
+  </div>
+
+  <div class="phone">
+    <div class="phone-screen" id="phone-screen">
+      <div class="app-top"><span>9:41</span><span>●●● 5G</span></div>
+      <p class="app-hello">Hi, Investor 👋</p>
+      <div class="app-card" id="app-card">
+        <p class="app-emoji" id="app-emoji">✨</p>
+        <h3 id="app-title">Your market moment</h3>
+        <p id="app-body">Send a headline to see how we feel about it.</p>
+      </div>
+      <p class="app-headline" id="app-headline"></p>
+      <button class="app-cta" id="app-cta">Keep investing</button>
+    </div>
+  </div>
+</div>
+
+<p class="truth-note" id="nb-truth">What actually happened: the app's reaction is chosen only from
+  the headline's sentiment label. It knows nothing about your money.</p>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='vendor/confetti.browser.js') }}"></script>
+<script src="{{ url_for('static', filename='js/neobank.js') }}"></script>
+{% endblock %}

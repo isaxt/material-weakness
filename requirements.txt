@@ -1,0 +1,8 @@
+flask>=3.0
+pandas>=2.0
+numpy>=1.26
+yfinance>=0.2.40
+certifi
+# PyTorch trains the forecaster. It has no Intel Mac versions, so it's skipped there
+# and the site uses the forecaster that ships already trained.
+torch>=2.2; sys_platform != "darwin" or platform_machine != "x86_64"

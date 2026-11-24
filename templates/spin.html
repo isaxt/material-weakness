@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Spin Dashboard{% endblock %}
+{% block body_class %}page-spin{% endblock %}
+{% block content %}
+<p class="eyebrow">Components · Spin Dashboard</p>
+<h1>One dataset. Four narratives.</h1>
+<p class="lede">Choose a mood, or type a headline and let FinBERT choose for you.
+  The data never changes. The story always does.</p>
+<pre class="ascii-field ascii-strip" data-rows="5" data-trend="up" data-seed="31" aria-hidden="true"></pre>
+
+<div class="controls">
+  <label>Ticker
+    <select id="ticker">
+      {% for t in tickers %}<option value="{{ t }}">{{ t }}</option>{% endfor %}
+    </select>
+  </label>
+  <div class="mood-dial" role="radiogroup" aria-label="Mood">
+    {% for key, name in moods.items() %}
+      <button class="mood {% if key == 'honest' %}active{% endif %}" data-mood="{{ key }}">{{ name }}</button>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="headline-box">
+  <input id="headline" type="text" placeholder="Or paste a news headline, e.g. &quot;Company misses earnings, cuts guidance&quot;">
+  <button id="headline-go" class="btn btn-ghost">Let FinBERT pick the mood</button>
+  <p id="sentiment-readout" class="mono small"></p>
+</div>
+
+<section id="dashboard" class="dashboard palette-honest">
+  <header>
+    <h2 id="spin-headline">Loading…</h2>
+    <p id="spin-subhead"></p>
+  </header>
+  <div class="kpis" id="kpis"></div>
+  <div class="chart-wrap"><canvas id="spin-chart"></canvas></div>
+</section>
+
+<div class="spin-notes">
+  <div id="tricks-box" class="tricks hidden">
+    <h3>Design techniques used</h3>
+    <ul id="tricks"></ul>
+  </div>
+  <div class="truth-note" id="truth"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/spin.js') }}"></script>
+{% endblock %}

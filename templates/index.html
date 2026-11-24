@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Overview{% endblock %}
+{% block body_class %}page-home{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">For finance teams across the buy side, sell side and wrong side</p>
+  <h1 class="display">Numbers that need<br>to feel <span class="accent pixel">better.</span></h1>
+  <p class="lede">Material Weakness gives finance teams a shared language for turning any quarter into a
+    growth story. Foundations, components and patterns, all powered by real market data and
+    machine learning.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ url_for('spin') }}">Try the Spin Dashboard →</a>
+    <a class="btn btn-ghost" href="{{ url_for('foundations') }}">[ Browse foundations ]</a>
+  </div>
+  <pre class="ascii-field hero-field" data-rows="16" data-trend="up" data-seed="22" aria-hidden="true"></pre>
+</section>
+
+<section class="folders-section">
+  <p class="eyebrow center">Components</p>
+  <h2 class="section-title center">What's on your desk<br>this quarter?</h2>
+  <p class="center muted">Pick a folder. Every one of them contains good news.</p>
+
+  <div class="folders">
+    {% set folders = [
+      ("foundations", "01 / Foundations", "Color & type", "A palette earned, not chosen. Each color's weight comes from how often real filings sound that way, scored by FinBERT.", "10-K sentences", "Brand tokens with plausible deniability", "aqua"),
+      ("voice", "02 / Voice & Tone", "Voice & Tone", "Paste any sentence and find out whether it's vague enough to publish. Hedges and jargon earn points.", "Any sentence you'd rather not commit to", "An on-brand score out of 100", "sage"),
+      ("spin", "03 / Spin Dashboard", "Spin Dashboard", "One stock, four moods. Choose Investor Day and watch the y-axis, the date range and the forecast fall into line.", "Daily prices and a PyTorch forecast", "Four narratives from one dataset", "blue"),
+      ("neobank", "04 / Neobank Mode", "Neobank Mode", "Paste a headline. FinBERT reads it and a parody fintech app responds with confetti or a gentle affirmation.", "A market headline", "An emotionally appropriate app", "lilac"),
+      ("terminal", "05 / Terminal vs. App", "Terminal vs. App", "Everything at once, or one big reassuring number. The app picks the period that looks best.", "The same price history", "Two worldviews, one footnote", "peach"),
+    ] %}
+    {% for endpoint, tab, title, body, start, take, color in folders %}
+      <article class="folder folder-{{ color }}" style="--i: {{ loop.index0 }}">
+        <span class="folder-tab">{{ tab }}</span>
+        <div class="folder-body">
+          <div class="paper">
+            <h3>{{ title }}</h3>
+            <p>{{ body }}</p>
+            <dl>
+              <div><dt>Start with</dt><dd>{{ start }}</dd></div>
+              <div><dt>Take forward</dt><dd>{{ take }}</dd></div>
+            </dl>
+            <a class="btn btn-soft" href="{{ url_for(endpoint) }}">Open folder</a>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="principles">
+  <p class="eyebrow">Principles</p>
+  <pre class="principles-tree">material_weakness / principles
+├── 01  Lead with the feeling. The number can come later, or not at all.
+├── 02  Y-axes start wherever the story starts.
+├── 03  Red is reserved for competitors.
+└── 04  If it's bad, make the font smaller and the white space larger.</pre>
+</section>
+
+<p class="truth-note">What actually happened: this is a satirical project about how dashboards,
+  brand systems and fintech apps frame financial data. Every page shows the real, unspun numbers
+  in a footnote like this one.</p>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/folders.js') }}"></script>
+{% endblock %}

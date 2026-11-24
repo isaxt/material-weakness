@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Foundations{% endblock %}
+{% block content %}
+<p class="eyebrow">Foundations</p>
+<h1>Color</h1>
+<p class="lede">Our palette isn't chosen. It's <em>earned</em>. Each color's weight comes from how
+  often corporate filings actually sound that way, as scored by FinBERT.</p>
+<pre class="ascii-field ascii-strip" data-rows="5" data-trend="flat" data-seed="5" aria-hidden="true"></pre>
+
+{% if palette %}
+  <div class="palette-bar">
+    {% for c in palette.palette %}
+      <div style="flex: {{ [c.share, 0.04]|max }}; background: {{ c.hex }}"
+           title="{{ c.name }} {{ (c.share * 100)|round|int }}%"></div>
+    {% endfor %}
+  </div>
+
+  <div class="swatches">
+    {% for c in palette.palette %}
+      <div class="swatch">
+        <div class="chip" style="background: {{ c.hex }}"></div>
+        <h3>{{ c.name }}</h3>
+        <p class="mono">{{ c.hex }} · --bull-{{ c.label }}</p>
+        <p class="share"><strong>{{ (c.share * 100)|round|int }}%</strong> of sampled sentences
+          ({{ c.count }} of {{ palette.n }})</p>
+        <p>{{ c.usage }}</p>
+        {% if c.example %}
+          <blockquote>"{{ c.example }}"</blockquote>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <p class="truth-note">What actually happened: {{ palette.n }} sentences from
+    <em>{{ palette.source }}</em>, scored by
+    {{ "FinBERT (ProsusAI/finbert)" if palette.engine == "finbert" else "the backup word list (FinBERT wasn't loaded)" }}.
+    Rebuild with <code>python scripts/build_palette.py</code>.</p>
+{% else %}
+  <div class="empty">
+    <p>No palette yet. Run <code>python scripts/build_palette.py</code> to generate it from 10-K sentences.</p>
+  </div>
+{% endif %}
+
+<h2>Type</h2>
+<div class="type-scale">
+  <p class="display" style="font-size: 56px">Display · Record quarter</p>
+  <p style="font-family: var(--display); font-size: 28px; font-weight: 700">Heading · Continued momentum</p>
+  <p style="font-size: 16px">Body · We remain focused on disciplined execution.</p>
+  <p class="mono" style="font-size: 12px; color: var(--muted)">Mono · CUSIP 000000000 · basis points · as of today</p>
+  <p style="font-size: 9px; color: var(--muted)">Disclosure · Results include a one-time impairment of $2.1B.</p>
+</div>
+
+<h2>Usage</h2>
+<div class="do-dont">
+  <div class="do"><h4>Do</h4><p>Show growth in Guidance Green at 48px.</p></div>
+  <div class="dont"><h4>Don't</h4><p>Show a loss larger than the logo.</p></div>
+</div>
+{% endblock %}

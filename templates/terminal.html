@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Terminal vs. App{% endblock %}
+{% block body_class %}page-terminal{% endblock %}
+{% block content %}
+<p class="eyebrow">Patterns · Terminal vs. App</p>
+<h1>Same data, two worldviews.</h1>
+<p class="lede">The terminal shows everything. The app shows one number, and it picks the nicest one.</p>
+<pre class="ascii-field ascii-strip" data-rows="5" data-trend="down" data-seed="17" aria-hidden="true"></pre>
+
+<div class="controls">
+  <label>Ticker
+    <select id="t-ticker">
+      {% for t in tickers %}<option value="{{ t }}">{{ t }}</option>{% endfor %}
+    </select>
+  </label>
+  <div class="toggle" role="tablist">
+    <button class="mood active" data-view="terminal">Terminal</button>
+    <button class="mood" data-view="app">App</button>
+  </div>
+</div>
+
+<section id="view-terminal" class="terminal-view">
+  <div class="term-bar"><span id="term-ticker">—</span> <span>EQUITY</span> <span id="term-asof"></span></div>
+  <div class="term-grid">
+    <div class="term-panel"><h4>PRICE</h4><div id="term-price" class="term-big"></div>
+      <table id="term-changes"></table></div>
+    <div class="term-panel"><h4>RISK</h4><table id="term-risk"></table></div>
+    <div class="term-panel"><h4>MODEL</h4><table id="term-model"></table></div>
+    <div class="term-panel wide"><h4>LAST 60 SESSIONS</h4><canvas id="term-chart" height="90"></canvas></div>
+    <div class="term-panel"><h4>RECENT CLOSES</h4><table id="term-table"></table></div>
+  </div>
+</section>
+
+<section id="view-app" class="app-view hidden">
+  <p class="app-label" id="app-label"></p>
+  <p class="app-number" id="app-number"></p>
+  <canvas id="app-spark" height="70"></canvas>
+  <p class="app-caption">You're doing great.</p>
+</section>
+
+<p class="truth-note" id="t-truth"></p>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/terminal.js') }}"></script>
+{% endblock %}
